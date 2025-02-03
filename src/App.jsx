@@ -12,14 +12,27 @@ export default function App() {
     setProductName("");
   };
 
+  const emptyList = () => {
+    setShoppingList([]);
+  };
+
+  const handleDelete = (index) => {
+    setShoppingList((currentState) =>
+      currentState.filter((product, productIndex) => productIndex !== index)
+    );
+  };
+
   return (
     <div>
       <h1>Lista della spesa</h1>
       <ul>
         {shoppingList.map((product, index) => (
-          <li key={index}>{product}</li>
+          <li key={index}>
+            {product} <button onClick={() => handleDelete(index)}>⨉</button>
+          </li>
         ))}
       </ul>
+      <button onClick={emptyList}>Cancella lista</button>
       <hr />
       <h2>Aggiungi prodotto</h2>
       <form onSubmit={handleSubmit}>
